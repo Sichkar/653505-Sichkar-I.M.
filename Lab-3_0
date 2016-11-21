@@ -1,0 +1,469 @@
+//Laba3
+//Sichkar I.M.(№23)
+//653505
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <math.h>
+#include <cmath>
+#include <conio.h>
+#include <stdlib.h>
+#include <string>
+
+using namespace std;
+
+double M_PI = 3.1415;
+
+void z1()
+{
+	int i;
+	double a, b, N;
+	N = 0;
+	i = 1;
+	while (i <= 30)
+	{
+		if (i % 2 == 1)
+		{
+			a = i;
+			b = pow(i, 2);
+		}
+		else
+		{
+			a = i / 2;
+			b = pow(i, 3);
+		}
+		N = N + pow(a - b, 2);
+		i++;
+	}
+	cout << "Сумма равна: " << N;
+	_getch();
+}
+
+void z2()
+{
+	double dn, S, n;
+	n = 1;
+	S = 0;
+	cout << "dn = 1/2^n + 1/3^n" << endl;
+	cout << "---------------------------------" << endl;
+	do
+	{
+		dn = 1 / pow(2, n) + 1 / pow(3, n);
+		S = S + dn;
+		cout << "d" << n << " = " << dn << endl;
+		n++;
+	} while (dn >= 0.001);
+	cout << "---------------------------------" << endl;
+	cout << "Сумма равна: " << S;
+	_getch();
+}
+
+void z3()
+{
+	double a, b, h, x, m, y, i;
+	a = 0;
+	b = M_PI / 2;
+	m = 20;
+	h = (b - a) / m;
+	cout << "Значения функции y = sin(x) - cos(x) на отрезке [0,pi/2]: " << endl;
+	cout << "--------------------------------" << endl;
+	for (i = 1; i <= m; i++)
+	{
+		x = a + i*h;
+		y = sin(x) - cos(x);
+		cout << i + 1 << ")" << "x = " << x << endl;
+		cout << "  y = " << y << endl;
+	}
+
+
+	_getch();
+}
+
+
+//1 индивидуалка не найдена
+
+void ind_2()
+{
+	double h, i, xmin, xmax, x, k, x0, y0, y;
+	xmin = 2;
+	xmax = 3;
+	x = xmin;
+	i = 1;
+	cout << "На сколько частей разделить область определения корня?" << endl << "Введите значение: ";
+	cin >> k;
+	h = (xmax - xmin) / k;
+	cout << "Шаг равен: " << h << endl;
+	cout << "--------------------------------" << endl;
+	y0 = abs(1 / tan(2 * x) - 1 / (1 + pow(x, 2)));
+	x0 = xmin;
+	for (i = 0; i <= k; i++)
+	{
+		x = xmin + i*h;
+		y = 1 / tan(2 * x) - 1 / (1 + pow(x, 2));
+		cout << i + 1 << ")" << "x = " << x << endl;
+		cout << "  y = " << y << endl;
+		if (abs(y) < y0)
+		{
+			x0 = x;
+			y0 = abs(y);
+		}
+
+	}
+	cout << "Наиболее приближенный корень: " << x0;
+	_getch();
+
+}
+
+void ind_3()
+{
+	double x, xmax, xmin, h, y, i;
+	xmin = 1;
+	xmax = 5;
+	h = 1;
+	i = 1;
+	cout << "Значения функции y = sin(x)*sinh(x) на отрезке [1, 5] с шагом 1: " << endl;
+	cout << "--------------------------------" << endl;
+	for (x = xmin; x <= xmax; x = x + h)
+	{
+		y = sin(x)*sinh(x);
+		cout << i << ")" << "x = " << x << endl;
+		cout << "  y = " << y << endl;
+		i++;
+	}
+	_getch();
+}
+
+
+void dop_1_1()
+{
+	int i, a, b, k;
+	for (k = 2; k <= 9; k++)
+	{
+		cout << "Числа, сумма цифр которых не меняется при умножении числа на " << k << ": " << endl;
+		for (i = 10; i <= 99; i++)
+		{
+			a = i % 10 + i / 10;
+			b = (k * i) / 100 % 10 + (k * i) / 10 % 10 + (k * i) % 10;
+			if (a == b) cout << i << "; ";
+		}
+		cout << endl << "--------------------------------" << endl;
+	}
+
+	_getch();
+}
+
+void dop_1_2()
+{
+	int i, a, b;
+	cout << "Введите целое число: " << endl;
+	cin >> a;
+	cout << "Трёхзначные числа, сумма цифр которых равна заданному числу: " << endl;
+	for (i = 100; i <= 999; i++)
+	{
+		b = i % 10 + i / 10 % 10 + i / 100;
+		if (a == b) cout << i << endl;
+	}
+	_getch();
+}
+
+void dop_1_3()
+{
+	int i, a, b;
+	cout << "Трёхзначные числа, средняя цифра которых равна сумме первой и последней: " << endl;
+	for (i = 100; i <= 999; i++)
+	{
+		a = i / 10 % 10;
+		b = i % 10 + i / 100;
+		if (a == b) cout << i << endl;
+	}
+	_getch();
+}
+
+void dop_1_4()
+{
+	int i, a, b;
+	cout << "Трёхзначные числа, которые можно представить разностью между квадратом числа," << endl;
+	cout << "образованного первыми двумя цифрами и квадратом третьей цифры: " << endl;
+	for (i = 100; i <= 999; i++)
+	{
+		a = pow(i / 10, 2);
+		b = pow(i % 10, 2);
+		if (i == a - b) cout << i << endl;
+	}
+	_getch();
+}
+
+void dop_1_5()
+{
+	int i, a, b;
+	cout << "Двузначные числа, сумма квадратов цифр которых делится на 17: " << endl;
+	for (i = 10; i <= 99; i++)
+	{
+		a = pow(i / 10, 2) + pow(i % 10, 2);
+		b = a % 17;
+		if (b == 0) cout << i << endl;
+	}
+    _getch();
+}
+
+void dop_1_6()
+{
+	int i, k, p, l, m;
+	cout << "Трёхзначные числа, представимые в виде сумм факториалов своих цифр: " << endl;
+	for (i = 100; i <= 999; i++)
+	{
+		k = l = m = 1;
+		for (p = 1; p <= i / 100; p++)
+		{
+			k = k * p;
+		}
+		for (p = 1; p <= i % 10; p++)
+		{
+			l = l * p;
+		}
+		for (p = 1; p <= i / 10 % 10; p++)
+		{
+			m = m * p;
+		}
+		if (i == k + l + m) cout << i << endl;
+	}
+	_getch();
+}
+
+void dop_1_7()
+{
+	int i, a, p;
+	p = 0;
+	cout << "Двузначные числа, у которых куб суммы цифр равен самому числу: " << endl;
+	for (i = 10; i <= 99; i++)
+	{
+		a = pow(i / 10 + i % 10, 3);
+		cout << i << "   " << a << endl;
+		if (a == i)
+		{
+			cout << i << endl;
+			p = p + 1;
+		}
+	}
+	if (p == 0) cout << "Таких чисел нет";
+	_getch();
+}
+
+void dop_1_8()
+{
+	int i, a, b;
+	cout << "Двузначные числа, равные утроенному призведению своих цифр: " << endl;
+	for (i = 10; i <= 99; i++)
+	{
+		a = 3 * (i / 10) * (i % 10);
+		if (i == a) cout << i << endl;
+	}
+	_getch();
+}
+
+void dop_1_9()
+{
+	int i, a, b;
+	cout << "Двузначные числа, удвоенная сумма цифр которых равна их произведению: " << endl;
+	for (i = 10; i <= 99; i++)
+	{
+		a = 2 * (i / 10 + i % 10);
+		b = (i / 10)*(i % 10);
+		if (a == b) cout << i << endl;
+	}
+	_getch();
+}
+
+void dop_1_10()
+{
+	int i, j, M, a, p;
+	cout << "Введите натуральное число М: ";
+	cin >> M;
+	cout << "Сумма квадратов двух натуральных чисел равная М: " << endl;
+	p = 0;
+	for (i = 1; i <= sqrt(M); i++)
+	{
+		for (j = 1; j <= i; j++)
+		{
+			a = pow(i, 2) + pow(j, 2);
+			if (a == M)
+			{
+				cout << M << " = " << i << "^2 + " << j << "^2";
+				p = p + 1;
+			}
+		}
+	}
+	if (p == 0) cout << "Таких натуральных чисел нет.";
+	_getch();
+}
+
+void dop_1_11()
+{
+	int N, i;
+	double pr, summ, result;
+	cout << "Введите сумму вклада: ";
+	cin >> summ;
+	cout << "Введите ежемесячную процентную ставку: ";
+	cin >> pr;
+	cout << "Введите количество месяцев, на которое делается вклад: ";
+	cin >> N;
+	for (i = 1; i <= N; i++)
+	{
+		summ = summ + summ * (pr / 100);
+	}
+	cout << "Конечная сумма вклада через " << N << " месяцев: " << summ << endl;
+	_getch();
+}
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int a, all, bll;
+	cout << "Лабораторная работа №2." << endl;
+	do
+	{
+		system("cls");
+		cout << "1. Общие задания" << endl;
+		cout << "2. Индивидуальные задания" << endl;
+		cout << "3. Дополнительные задания" << endl;
+		cout << "4. Выйти из программы" << endl;
+		do {
+			cout << "Выберете пункт: ";
+			cin >> a;
+		} while (a<1 || a>5);
+		switch (a)
+		{
+		case 1:
+		{
+			do
+			{
+				system("cls");
+				cout << "Выберите задание (1 - 3): ";
+				cin >> all;
+				switch (all)
+				{
+				case 1:
+					system("cls");
+					z1();
+					break;
+
+				case 2:
+					system("cls");
+					z2();
+					break;
+				case 3:
+					system("cls");
+					z3();
+					break;
+				default:
+					break;
+				}
+			} while (all < 1 || all > 3);
+			break;
+		}
+		case 2:
+		{
+			do
+			{
+				system("cls");
+				cout << "Выберите задание (2 - 3): ";
+				cin >> all;
+				switch (all)
+				{
+				case 1:
+					system("cls");
+					cout<<"Не обнаружено";
+					break;
+				case 2:
+					system("cls");
+					ind_2();
+					break;
+				case 3:
+					system("cls");
+					ind_3();
+					break;
+				default:
+					break;
+				}
+			} while (all < 1 || all > 3);
+			break;
+		}
+		case 3:
+		{
+			do
+			{
+				system("cls");
+				cout << "Выберите задание (1 - 11): ";
+				cin >> all;
+				switch (all)
+				{
+				case 1:
+					system("cls");
+					dop_1_1();
+					break;
+
+				case 2:
+					system("cls");
+					dop_1_2();
+					break;
+
+				case 3:
+					system("cls");
+					dop_1_3();
+					break;
+
+				case 4:
+					system("cls");
+					dop_1_4();
+					break;
+
+				case 5:
+					system("cls");
+					dop_1_5();
+					break;
+
+				case 6:
+					system("cls");
+					dop_1_6();
+					break;
+
+				case 7:
+					system("cls");
+					dop_1_7();
+					break;
+
+				case 8:
+					system("cls");
+					dop_1_8();
+					break;
+
+				case 9:
+					system("cls");
+					dop_1_9();
+					break;
+
+				case 10:
+					system("cls");
+					dop_1_10();
+					break;
+
+				case 11:
+					system("cls");
+					dop_1_11();
+					break;
+
+				default:
+					break;
+				}
+			} while (all < 1 || all > 11);
+			break;
+		}
+
+
+			} while (all < 1 || all > 4);
+			break;
+		}
+		
+	 while (a != 5);
+
+	return 0;
+}
